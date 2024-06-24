@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_DB_CONNECTION_URL")
+}
+
+model User {
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(100)
+  email         String         @db.VarChar(50)
+  emailVerified DateTime?
+  password      String?        @db.VarChar(100)
+  image         String?        
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @default(now()) @updatedAt @map("updated_at")
+  Pet           Pet[] 
+
+  @@unique([email])
+  @@index([email])
+  @@map("users")
+}
+
+model Pet {
+  id            Int            @id @default(autoincrement())
+  name          String         @db.VarChar(100)
+  species       Species  
+  available     Boolean        @db.Boolean @default(true)
+  birthYear     Int            @db.Integer
+  dateAdded     DateTime       @default(now()) @map("date_added")
+  photoUrl      String?        @map("photo_url")
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int            @db.Integer
+
+  @@map("pets")
+  @@index([name, species])
+}
+
+enum Species {
+  dog
+  cat
+}
