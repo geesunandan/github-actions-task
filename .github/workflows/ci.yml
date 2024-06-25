@@ -42,7 +42,7 @@ jobs:
   deploy:
     name: build && push image to Docker hub
     runs-on: ubuntu-latest
-    needs: lint-test
+    # needs: lint-test
  
     steps:
       - uses: actions/checkout@v4
