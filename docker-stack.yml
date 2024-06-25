@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:14
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+    # ports:
+    #   - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: '1234'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_DB: 'node'
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+ 
+  app:
+    image: geesunandan/sample-node:master
+    deploy:
+      replicas: 4
+      placement:
+        constraints: [node.role == manager]
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - db
+    ports:
+      - 5555:3000

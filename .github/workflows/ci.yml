@@ -61,6 +61,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
  
  
+      - name: Read package version
+        id: get-version
+        run: |
+          echo "PACKAGE_VERSION=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
+
       - name: build && push 
         id: build-push
         uses: docker/build-push-action@v5
@@ -68,4 +73,6 @@ jobs:
           context: .
           file: Dockerfile
           push: ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch' }}
-          tags: geesunandan/sample-node:master
+          tags: |
+            geesunandan/sample-node:${{ env.PACKAGE_VERSION }}
+            geesunandan/sample-node:master
