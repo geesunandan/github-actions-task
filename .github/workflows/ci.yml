@@ -76,3 +76,13 @@ jobs:
           tags: |
             geesunandan/sample-node:${{ env.PACKAGE_VERSION }}
             geesunandan/sample-node:master
+
+      - name: Update Docker Stack
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            export IMAGE_TAG=${{ env.PACKAGE_VERSION }}
+            docker stack deploy -c docker-stack.yml app

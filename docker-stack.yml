@@ -17,7 +17,7 @@ services:
     #   - ./postgres-data:/var/lib/postgresql/data
  
   app:
-    image: geesunandan/sample-node:master
+    image: geesunandan/sample-node:${IMAGE_TAG}
     deploy:
       replicas: 4
       placement:
