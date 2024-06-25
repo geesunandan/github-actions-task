@@ -86,3 +86,5 @@ jobs:
           script: |
             export IMAGE_TAG=${{ env.PACKAGE_VERSION }}
             docker stack deploy -c docker-stack.yml app
+
+            
