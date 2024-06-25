@@ -85,6 +85,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             export IMAGE_TAG=${{ env.PACKAGE_VERSION }}
-            docker stack deploy -c docker-stack.yml app
+            docker stack deploy -c /home/sunandan/project/docker-stack.yml app
 
-            
+
