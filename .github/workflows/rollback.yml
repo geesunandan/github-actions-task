@@ -1,0 +1,22 @@
+name: RollBack CI/CD
+on:
+  workflow_dispatch:
+
+env:
+  CI: false
+  env_master: ${{ secrets.ENV_MASTER }}
+
+jobs:
+  rollback:
+    name: rollback
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update Docker Stack
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker service rollback app_app
