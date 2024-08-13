@@ -4,8 +4,7 @@ This is a simple Node application using postgres database. There are several uni
 
 Here are few requirements that I have to setup for the deployment of this application.
 
-> [!Note]
-> If you cannot meet all the specification that is OK but please submit the assignment with your genuine approaches
+
 
 - Github Actions must be used for the pipelines.
 - Make sure to add .env file and .env.test for test environment for postgres connection. Refer .env.example 
@@ -18,4 +17,4 @@ Here are few requirements that I have to setup for the deployment of this applic
 - If you want to go extra mile Add (makefile or bashfile) for local development and test. The script should start database and start local environment
     - For example: `bash start` should run the database instance start local application and `bash test` should setup the databse and run the test (Hint: One of solution can be leveraging docker compose)
 
-If you have any questions please feel free to reach us.
+
